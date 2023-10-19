@@ -1,0 +1,64 @@
+syntax = "v1"
+
+info (
+	title: "UserApi"
+	desc: "用户服务相关 API"
+	author: "DESKTOP-4T5UKHP/Owner"
+	email: "renpanpan1990@163.com"
+)
+
+type (
+	LoginRequest {
+		Email    string `json:"email"`
+		Password string `json:"password"`
+	}
+
+	LoginResponse {
+		UserReply
+	}
+)
+
+type (
+	RegisterRequest {
+		Username string `json:"username"`
+		Email    string `json:"email"`
+		Password string `json:"password"`
+	}
+
+	RegisterResponse {
+		UserReply
+	}
+)
+
+type UserInfoResponse {
+	UserReply
+}
+
+type UserReply {
+	Id       int64  `json:"id"`
+	Username string `json:"username"`
+	Email    string `json:"email"`
+	JwtToken
+}
+
+type JwtToken {
+	AccessToken  string `json:"accessToken,omitempty"`
+	AccessExpire int64  `json:"accessExpire,omitempty"`
+	RefreshAfter int64  `json:"refreshAfter,omitempty"`
+}
+
+service user-api {
+	@handler Login
+	post /users/login (LoginRequest) returns (LoginResponse)
+
+	@handler Register
+	post /users/register (RegisterRequest) returns(RegisterResponse)
+}
+
+@server (
+	jwt: Auth
+)
+service user-api {
+	@handler UserInfo
+	post /users/userinfo returns(UserInfoResponse)
+}
