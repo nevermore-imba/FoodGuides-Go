@@ -1,0 +1,70 @@
+syntax = "v1"
+
+info (
+	title: "Food Api"
+	desc: "食材管理服务相关 API"
+	author: "DESKTOP-4T5UKHP/Owner"
+	email: "renpanpan1990@163.com"
+)
+
+type (
+	SearchRequest {
+		Key string `json:"key"`
+	}
+	SearchResponse {
+		FoodReply
+	}
+)
+
+type (
+	AddFoodRequest {
+		FoodId string `json:"foodId"`
+	}
+	AddFoodResponse {
+	}
+)
+
+type (
+	DeleteFoodRequest {
+		FoodId string `json:"foodId"`
+	}
+	DeleteFoodResponse {
+	}
+)
+
+type FoodReply {
+	Id           string `json:"id"`
+	Name         string `json:"name"`
+	Protein      string `json:"protein"`
+	Fat          string `json:"fat"`
+	Carbohydrate string `json:"carbohydrate"`
+	Calorie      string `json:"calorie"`
+	Minerals     string `json:"minerals"`
+	Calcium      string `json:"calcium"`
+	Phosphorus   string `json:"phosphorus"`
+	Iron         string `json:"iron"`
+	Purine       string `json:"purine"`
+}
+
+type FoodListResponse {
+	List []FoodReply `json:"list"`
+}
+
+service food-api {
+	@handler Search    // 食材搜索
+	post /food/search(SearchRequest) returns(SearchResponse)
+}
+
+@server(
+	jwt: Auth
+)
+service food-api {
+	@handler AddFood      // 新增食材
+	post /food/addfood (AddFoodRequest) returns(AddFoodResponse)
+
+	@handler DeleteFood   // 删除食材
+	post /food/deletefood (DeleteFoodRequest) returns(DeleteFoodResponse)
+
+	@handler FoodList     // 我的食材
+	post /food/foodlist returns(FoodListResponse)
+}

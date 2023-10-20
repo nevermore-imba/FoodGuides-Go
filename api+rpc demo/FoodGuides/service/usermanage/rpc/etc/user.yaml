@@ -1,0 +1,15 @@
+Name: user.rpc
+ListenOn: 0.0.0.0:9999
+
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: user.rpc
+
+Mysql:
+  DataSource: root:123456@tcp(127.0.0.1:9528)/foodguides?charset=utf8mb4&parseTime=True&loc=Local
+
+AccessSecret: ad879037-d3fd-tghj-112d-6bfc35d54b7d
+AccessExpire: 86400
+
+Salt: HWVOFkGgPTryzICwd7qnJaZR9KQ2i8xe

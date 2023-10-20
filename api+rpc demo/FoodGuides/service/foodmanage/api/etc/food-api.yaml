@@ -1,0 +1,13 @@
+Name: food-api
+Host: 0.0.0.0
+Port: 8889
+
+Auth:
+  AccessSecret: ad879037-d3fd-tghj-112d-6bfc35d54b7d
+  AccessExpire: 86400
+
+FoodRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: food.rpc

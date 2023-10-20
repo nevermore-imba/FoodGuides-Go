@@ -1,0 +1,13 @@
+Name: user-api
+Host: 0.0.0.0
+Port: 8888
+
+Auth:
+  AccessSecret: ad879037-d3fd-tghj-112d-6bfc35d54b7d
+  AccessExpire: 86400
+
+UserRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: user.rpc

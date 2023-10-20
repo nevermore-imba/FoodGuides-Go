@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package food;
+option go_package="./food";
+
+message SearchRequest {
+  string searchKey = 1;
+}
+
+message AddFoodRequest {
+  string userid = 1;
+  string foodId = 2;
+}
+
+message DeleteFoodRequest {
+  string userid = 1;
+  string foodId = 2;
+}
+
+message FoodListRequest {
+  string userid = 1;
+}
+
+message FoodInfoResponse {
+  string protein = 1;
+  string fat = 2;
+  string carbohydrate = 3;
+  string calorie = 4;
+  string minerals = 5;
+  string calcium = 6;
+  string phosphorus = 7;
+  string iron = 8;
+  string purine = 9;
+  string id = 10;
+  string name = 11;
+}
+
+message StatusResponse {
+  int32 success = 1;
+}
+
+message FoodListResponse {
+  repeated FoodInfoResponse data = 1;
+}
+
+service Food {
+  rpc Search(SearchRequest) returns(FoodInfoResponse);
+  rpc AddFood(AddFoodRequest) returns(StatusResponse);
+  rpc DeleteFood(DeleteFoodRequest) returns(StatusResponse);
+  rpc FoodList(FoodListRequest) returns(FoodListResponse);
+}
